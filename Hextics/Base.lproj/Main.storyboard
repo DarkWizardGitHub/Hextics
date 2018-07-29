@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xP9-lN-rfe">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="fm4-JG-bXG">
+            <objects>
+                <viewController id="xP9-lN-rfe" customClass="LaunchScreenViewController" customModule="Hextics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kAQ-7h-ivH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="darklogo512.png" translatesAutoresizingMaskIntoConstraints="NO" id="rzZ-VA-UjP">
+                                <rect key="frame" x="79" y="240" width="256" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="eLP-TV-gM9"/>
+                                    <constraint firstAttribute="width" constant="256" id="q0X-UQ-XiA"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rzZ-VA-UjP" firstAttribute="centerX" secondItem="kAQ-7h-ivH" secondAttribute="centerX" id="IMJ-ec-wcn"/>
+                            <constraint firstItem="rzZ-VA-UjP" firstAttribute="centerY" secondItem="kAQ-7h-ivH" secondAttribute="centerY" id="U4e-pt-YlP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="24l-Ql-p37"/>
+                    </view>
+                    <connections>
+                        <outlet property="logoImage" destination="rzZ-VA-UjP" id="EcD-Ml-Emm"/>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="segue1" id="6kn-De-hRe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nvH-BJ-hRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1546" y="118"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Hextics" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wno-kx-H8l">
+                                <rect key="frame" x="0.0" y="70" width="414" height="566"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YlG-S5-QWy" userLabel="Content View" customClass="SKView">
+                                        <rect key="frame" x="0.0" y="0.0" width="223" height="353"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Wno-kx-H8l" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="1DT-VT-XJN"/>
+                            <constraint firstItem="Wno-kx-H8l" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="50" id="H4i-DG-TaQ"/>
+                            <constraint firstItem="Wno-kx-H8l" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="R6H-eQ-XVT"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="Wno-kx-H8l" secondAttribute="bottom" constant="50" id="aKr-Xh-zfl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="YlG-S5-QWy" id="PTJ-K8-TTN"/>
+                        <outlet property="scrollView" destination="Wno-kx-H8l" id="5C2-vT-EiI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.39130434782609" y="118.20652173913044"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="darklogo512.png" width="512" height="512"/>
+    </resources>
+</document>
