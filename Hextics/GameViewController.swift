@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
                 // iPhone 6s Plus
                 // iPhone 7 Plus
                 // iPhone 8 Plus
-                print(Utility.shared.getDeviceName())
+                print(Utilities.shared.getDeviceName())
                 view.frame.size.width = 414
                 view.frame.size.height = 616
                 break

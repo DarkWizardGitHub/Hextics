@@ -1,11 +1,11 @@
 import Foundation
 
 // Utilityシングルトン
-class Utility: NSObject {
+class Utilities: NSObject {
     
     // シングルトン
     // シングルトンパターンはインスタンスが1個しか生成されないことを保証したい時に使用
-    static let shared = Utility()
+    static let shared = Utilities()
     
     // シングルトンの唯一性を保証するためprivateにする
     private override init() {

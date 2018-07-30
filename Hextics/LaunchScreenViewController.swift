@@ -31,7 +31,7 @@ class LaunchScreenViewController: UIViewController {
                        delay: 2.5,
                        options: UIViewAnimationOptions.curveEaseOut,
                        animations: { () in
-                        self.logoImage.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                        self.logoImage.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
                         self.logoImage.alpha = 0
         }, completion: { (Bool) in
             self.logoImage.removeFromSuperview()

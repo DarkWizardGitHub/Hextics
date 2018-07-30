@@ -99,7 +99,7 @@ class BattleFieldScene: SKScene {
         self.previousRow = tileMapNode!.tileRowIndex(fromPosition: previousPosition)
     }
     
-    //　ドラッグ時の呼び出しメソッド
+    // ドラッグ時の呼び出しメソッド
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // 選択しているNode名を取得

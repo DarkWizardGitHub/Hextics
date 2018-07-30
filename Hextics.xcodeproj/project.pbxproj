@@ -14,7 +14,8 @@
 		4243BBEE210DFEC500D0A0A2 /* darklogo512.png in Resources */ = {isa = PBXBuildFile; fileRef = 4243BBED210DFEC500D0A0A2 /* darklogo512.png */; };
 		4243BBF0210DFEDF00D0A0A2 /* BattleFieldScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243BBEF210DFEDE00D0A0A2 /* BattleFieldScene.swift */; };
 		4243BBF2210DFF5D00D0A0A2 /* HexTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4243BBF1210DFF5D00D0A0A2 /* HexTileSet.sks */; };
-		4243BBF4210DFF6300D0A0A2 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243BBF3210DFF6300D0A0A2 /* Utility.swift */; };
+		4243BBF4210DFF6300D0A0A2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243BBF3210DFF6300D0A0A2 /* Utilities.swift */; };
+		42606A90210ED1AC00747726 /* ConnectionMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42606A8F210ED1AC00747726 /* ConnectionMethodViewController.swift */; };
 		426116B7210E1BC100A55464 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426116B6210E1BC100A55464 /* LaunchScreenViewController.swift */; };
 		428E8AAA210DFABB0097CEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E8AA9210DFABB0097CEB3 /* AppDelegate.swift */; };
 		428E8AAE210DFABB0097CEB3 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 428E8AAD210DFABB0097CEB3 /* Actions.sks */; };
@@ -38,7 +39,8 @@
 		4243BBED210DFEC500D0A0A2 /* darklogo512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darklogo512.png; sourceTree = "<group>"; };
 		4243BBEF210DFEDE00D0A0A2 /* BattleFieldScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleFieldScene.swift; sourceTree = "<group>"; };
 		4243BBF1210DFF5D00D0A0A2 /* HexTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HexTileSet.sks; sourceTree = "<group>"; };
-		4243BBF3210DFF6300D0A0A2 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		4243BBF3210DFF6300D0A0A2 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		42606A8F210ED1AC00747726 /* ConnectionMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionMethodViewController.swift; sourceTree = "<group>"; };
 		426116B6210E1BC100A55464 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		428E8AA6210DFABB0097CEB3 /* Hextics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hextics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		428E8AA9210DFABB0097CEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,7 +129,7 @@
 				428E8AB3210DFABB0097CEB3 /* Main.storyboard */,
 				428E8AB8210DFABD0097CEB3 /* LaunchScreen.storyboard */,
 				428E8AA9210DFABB0097CEB3 /* AppDelegate.swift */,
-				4243BBF3210DFF6300D0A0A2 /* Utility.swift */,
+				4243BBF3210DFF6300D0A0A2 /* Utilities.swift */,
 				426116B6210E1BC100A55464 /* LaunchScreenViewController.swift */,
 				428E8AB1210DFABB0097CEB3 /* GameViewController.swift */,
 				4243BBEF210DFEDE00D0A0A2 /* BattleFieldScene.swift */,
@@ -140,6 +142,7 @@
 				428E8AC9210DFC860097CEB3 /* Unit Type ID List.plist */,
 				428E8AC7210DFC7F0097CEB3 /* Ability ID List.plist */,
 				428E8AC3210DFC020097CEB3 /* Hero ID List.plist */,
+				42606A8F210ED1AC00747726 /* ConnectionMethodViewController.swift */,
 			);
 			path = Hextics;
 			sourceTree = "<group>";
@@ -227,11 +230,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4243BBF4210DFF6300D0A0A2 /* Utility.swift in Sources */,
+				4243BBF4210DFF6300D0A0A2 /* Utilities.swift in Sources */,
 				426116B7210E1BC100A55464 /* LaunchScreenViewController.swift in Sources */,
 				428E8AC6210DFC070097CEB3 /* Unit.swift in Sources */,
 				428E8AB2210DFABB0097CEB3 /* GameViewController.swift in Sources */,
 				4243BBF0210DFEDF00D0A0A2 /* BattleFieldScene.swift in Sources */,
+				42606A90210ED1AC00747726 /* ConnectionMethodViewController.swift in Sources */,
 				428E8AAA210DFABB0097CEB3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
