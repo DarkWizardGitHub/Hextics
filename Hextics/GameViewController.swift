@@ -105,6 +105,39 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
     
+    @IBAction func pushCompleteCommand(_ sender: UIButton) {
+        
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
+        
+        dispatchGroup.enter()
+        dispatchQueue.async(group: dispatchGroup) {
+            for buffer in GlobalVariableManager.shared.unit1Actions {
+                GlobalVariableManager.shared.unitNodes[0].run(buffer)
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.enter()
+        dispatchQueue.async(group: dispatchGroup) {
+            for buffer in GlobalVariableManager.shared.unit2Actions {
+                GlobalVariableManager.shared.unitNodes[1].run(buffer)
+                dispatchGroup.leave()
+            }
+        }
+        
+        // 全ての非同期処理完了後にメインスレッドで処理
+        dispatchGroup.notify(queue: .main) {
+            print("All Process Done!")
+        }
+        
+        
+        ////アクションをまとめる。
+        //let actionAll = SKAction.sequence([action1,action2,action3])
+        //
+        ////アクションを実行する。
+
+    }
 }
 
 extension GameViewController:UIScrollViewDelegate {
@@ -119,5 +152,4 @@ extension GameViewController:UIScrollViewDelegate {
         print("zooooooming®")
         return contentView
     }
-    
 }

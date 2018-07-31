@@ -32,10 +32,15 @@ class BattleFieldScene: SKScene {
 
     //タイルマップノード
     var tileMapNode: SKTileMapNode!
-    var hogeNodes: [SKSpriteNode!] = [SKSpriteNode(imageNamed: "testuniticon.png"), SKSpriteNode(imageNamed: "testuniticon2.png")]
+//    var hogeNodes: [SKSpriteNode!] = [SKSpriteNode(imageNamed: "testuniticon.png"), SKSpriteNode(imageNamed: "testuniticon2.png")]
+
+    
     
     // 遷移時に実行される処理
     override func didMove(to view: SKView) {
+        
+        GlobalVariableManager.shared.unitNodes.append(SKSpriteNode(imageNamed: "testuniticon.png"))
+        GlobalVariableManager.shared.unitNodes.append(SKSpriteNode(imageNamed: "testuniticon2.png"))
         
         
         // タイルマップノードを作成
@@ -63,17 +68,17 @@ class BattleFieldScene: SKScene {
         //シーンの子ノードにタイルマップノードを追加する。
         self.addChild(tileMapNode)
         
-        hogeNodes[0].size = CGSize.init(width: 100, height: 100)
-        hogeNodes[0].name = "hoge1"
-        hogeNodes[0].zPosition = 1
-        hogeNodes[0].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 2, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 0, row: 7).y)
-        self.addChild(hogeNodes[0])
+        GlobalVariableManager.shared.unitNodes[0].size = CGSize.init(width: 100, height: 100)
+        GlobalVariableManager.shared.unitNodes[0].name = "hoge1"
+        GlobalVariableManager.shared.unitNodes[0].zPosition = 1
+        GlobalVariableManager.shared.unitNodes[0].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 2, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 0, row: 7).y)
+        self.addChild(GlobalVariableManager.shared.unitNodes[0])
 
-        hogeNodes[1].size = CGSize.init(width: 100, height: 100)
-        hogeNodes[1].zPosition = 1
-        hogeNodes[1].name = "hoge2"
-                hogeNodes[1].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 4, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 4, row: 3).y)
-        self.addChild(hogeNodes[1])
+        GlobalVariableManager.shared.unitNodes[1].size = CGSize.init(width: 100, height: 100)
+        GlobalVariableManager.shared.unitNodes[1].zPosition = 1
+        GlobalVariableManager.shared.unitNodes[1].name = "hoge2"
+        GlobalVariableManager.shared.unitNodes[1].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 4, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 4, row: 3).y)
+        self.addChild(GlobalVariableManager.shared.unitNodes[1])
 
     }
     
@@ -81,12 +86,15 @@ class BattleFieldScene: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         // 触ったNode名を取得
-        touchedNodeName = self.atPoint(touches.first!.location(in: self)).name
-        print("touchedNodeName: \(touchedNodeName)")
-        for buffer in self.hogeNodes {
-            if buffer?.name == touchedNodeName {
-                self.touchedNode = buffer!
-            }
+        if self.atPoint(touches.first!.location(in: self)).name != "Default Tile Map" {
+            touchedNodeName = self.atPoint(touches.first!.location(in: self)).name
+            print("touchedNodeName: \(touchedNodeName)")
+            for buffer in GlobalVariableManager.shared.unitNodes {
+                if buffer.name == touchedNodeName {
+                    self.touchedNode = buffer
+                }
+        }
+
         }
         
         // Nodeの現在Tile座標取得
@@ -196,20 +204,24 @@ class BattleFieldScene: SKScene {
     // 指定したTileのcolumnとrowから座標を取得して、Tileの中心に移動
     func moveNode() {
         
-        let action = SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0)
+        print("\(self.touchedNodeName):\(GlobalVariableManager.shared.unitNodes[0].name)")
+        print("\(self.touchedNodeName):\(GlobalVariableManager.shared.unitNodes[1].name)")
+        if self.touchedNodeName == GlobalVariableManager.shared.unitNodes[0].name {
+            GlobalVariableManager.shared.unit1Actions.removeAll()
+            GlobalVariableManager.shared.unit1Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
+            print(GlobalVariableManager.shared.unit1Actions)
+        } else if self.touchedNodeName == GlobalVariableManager.shared.unitNodes[1].name {
+            GlobalVariableManager.shared.unit2Actions.removeAll()
+            GlobalVariableManager.shared.unit2Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
+            print(GlobalVariableManager.shared.unit2Actions)
+        }
+        
         
         print(distinationColumn - previousColumn)
         print(distinationRow - previousRow)
         
         //アクションを実行
-        self.touchedNode.run(action)
+//        self.touchedNode.run(action)
         
     }
 }
-
-
-////アクションをまとめる。
-//let actionAll = SKAction.sequence([action1,action2,action3])
-//
-////アクションを実行する。
-//birdNode.runAction(actionAll)

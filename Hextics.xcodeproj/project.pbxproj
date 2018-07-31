@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420822E5210FD141002B87A6 /* GlobalVariableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420822E4210FD141002B87A6 /* GlobalVariableManager.swift */; };
 		4243BBE7210DFEB400D0A0A2 /* TestHexTile2_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 4243BBE5210DFEB400D0A0A2 /* TestHexTile2_128.png */; };
 		4243BBE8210DFEB400D0A0A2 /* TestHexTile1_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 4243BBE6210DFEB400D0A0A2 /* TestHexTile1_128.png */; };
 		4243BBEB210DFEBD00D0A0A2 /* testuniticon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4243BBE9210DFEBD00D0A0A2 /* testuniticon2.png */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		420822E4210FD141002B87A6 /* GlobalVariableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariableManager.swift; sourceTree = "<group>"; };
 		4243BBE5210DFEB400D0A0A2 /* TestHexTile2_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestHexTile2_128.png; sourceTree = "<group>"; };
 		4243BBE6210DFEB400D0A0A2 /* TestHexTile1_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TestHexTile1_128.png; sourceTree = "<group>"; };
 		4243BBE9210DFEBD00D0A0A2 /* testuniticon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testuniticon2.png; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				428E8AB3210DFABB0097CEB3 /* Main.storyboard */,
 				428E8AB8210DFABD0097CEB3 /* LaunchScreen.storyboard */,
 				428E8AA9210DFABB0097CEB3 /* AppDelegate.swift */,
+				420822E4210FD141002B87A6 /* GlobalVariableManager.swift */,
 				4243BBF3210DFF6300D0A0A2 /* Utilities.swift */,
 				426116B6210E1BC100A55464 /* LaunchScreenViewController.swift */,
 				428E8AB1210DFABB0097CEB3 /* GameViewController.swift */,
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				420822E5210FD141002B87A6 /* GlobalVariableManager.swift in Sources */,
 				4243BBF4210DFF6300D0A0A2 /* Utilities.swift in Sources */,
 				426116B7210E1BC100A55464 /* LaunchScreenViewController.swift in Sources */,
 				428E8AC6210DFC070097CEB3 /* Unit.swift in Sources */,

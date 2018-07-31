@@ -176,6 +176,9 @@
                                             <constraint firstAttribute="height" constant="50" id="Khu-Ex-O4G"/>
                                         </constraints>
                                         <state key="normal" title="End"/>
+                                        <connections>
+                                            <action selector="pushCompleteCommand:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4Qj-da-5Mv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
