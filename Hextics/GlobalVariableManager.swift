@@ -7,9 +7,10 @@ class GlobalVariableManager: NSObject {
     // シングルトンパターンはインスタンスが1個しか生成されないことを保証したい時に使用
     static let shared = GlobalVariableManager()
     
-    var unitNodes: [SKSpriteNode] = []
-    var unitActions: [[SKAction]] = [[]]
-    
+    var allyUnitNodes: [String:SKSpriteNode] = [:]
+    var allyUnitActions: [String:[String:SKAction]] = ["AllyUnit1": [:], "AllyUnit2": [:]]
+    var enemyUnitNodes: [String:SKSpriteNode] = [:]
+    var enemyUnitActions: [String:[String:SKAction]] = [:]
     
     // 動作確認用簡易
     var unit1Actions: [SKAction] = []

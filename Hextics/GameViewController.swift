@@ -110,21 +110,36 @@ class GameViewController: UIViewController {
         let dispatchGroup = DispatchGroup()
         let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
         
-        dispatchGroup.enter()
-        dispatchQueue.async(group: dispatchGroup) {
-            for buffer in GlobalVariableManager.shared.unit1Actions {
-                GlobalVariableManager.shared.unitNodes[0].run(buffer)
+        
+        for node in GlobalVariableManager.shared.allyUnitNodes.values {
+            print(node)
+            dispatchGroup.enter()
+            dispatchQueue.async(group: dispatchGroup) {
+                var actions: [SKAction] = []
+                for action in GlobalVariableManager.shared.allyUnitActions[node.name!]!.values {
+                    actions.append(action)
+                }
+                let actionAll = SKAction.sequence(actions)
+                node.run(actionAll)
                 dispatchGroup.leave()
             }
         }
         
-        dispatchGroup.enter()
-        dispatchQueue.async(group: dispatchGroup) {
-            for buffer in GlobalVariableManager.shared.unit2Actions {
-                GlobalVariableManager.shared.unitNodes[1].run(buffer)
-                dispatchGroup.leave()
-            }
-        }
+//        dispatchGroup.enter()
+//        dispatchQueue.async(group: dispatchGroup) {
+//            for buffer in GlobalVariableManager.shared.unit1Actions {
+//                GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.run(buffer)
+//                dispatchGroup.leave()
+//            }
+//        }
+//
+//        dispatchGroup.enter()
+//        dispatchQueue.async(group: dispatchGroup) {
+//            for buffer in GlobalVariableManager.shared.unit2Actions {
+//                GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.run(buffer)
+//                dispatchGroup.leave()
+//            }
+//        }
         
         // 全ての非同期処理完了後にメインスレッドで処理
         dispatchGroup.notify(queue: .main) {

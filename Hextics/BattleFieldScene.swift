@@ -39,8 +39,8 @@ class BattleFieldScene: SKScene {
     // 遷移時に実行される処理
     override func didMove(to view: SKView) {
         
-        GlobalVariableManager.shared.unitNodes.append(SKSpriteNode(imageNamed: "testuniticon.png"))
-        GlobalVariableManager.shared.unitNodes.append(SKSpriteNode(imageNamed: "testuniticon2.png"))
+        GlobalVariableManager.shared.allyUnitNodes.updateValue(SKSpriteNode(imageNamed: "testuniticon.png"), forKey: "AllyUnit1")
+        GlobalVariableManager.shared.allyUnitNodes.updateValue(SKSpriteNode(imageNamed: "testuniticon2.png"), forKey: "AllyUnit2")
         
         
         // タイルマップノードを作成
@@ -68,17 +68,17 @@ class BattleFieldScene: SKScene {
         //シーンの子ノードにタイルマップノードを追加する。
         self.addChild(tileMapNode)
         
-        GlobalVariableManager.shared.unitNodes[0].size = CGSize.init(width: 100, height: 100)
-        GlobalVariableManager.shared.unitNodes[0].name = "hoge1"
-        GlobalVariableManager.shared.unitNodes[0].zPosition = 1
-        GlobalVariableManager.shared.unitNodes[0].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 2, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 0, row: 7).y)
-        self.addChild(GlobalVariableManager.shared.unitNodes[0])
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.size = CGSize.init(width: 100, height: 100)
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.name = "AllyUnit1"
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.zPosition = 1
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 2, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 0, row: 7).y)
+        self.addChild(GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!)
 
-        GlobalVariableManager.shared.unitNodes[1].size = CGSize.init(width: 100, height: 100)
-        GlobalVariableManager.shared.unitNodes[1].zPosition = 1
-        GlobalVariableManager.shared.unitNodes[1].name = "hoge2"
-        GlobalVariableManager.shared.unitNodes[1].position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 4, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 4, row: 3).y)
-        self.addChild(GlobalVariableManager.shared.unitNodes[1])
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.size = CGSize.init(width: 100, height: 100)
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.zPosition = 1
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.name = "AllyUnit2"
+        GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.position = CGPoint(x:tileMapNode!.centerOfTile(atColumn: 4, row: 3).x, y:tileMapNode!.centerOfTile(atColumn: 4, row: 3).y)
+        self.addChild(GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!)
 
     }
     
@@ -89,12 +89,11 @@ class BattleFieldScene: SKScene {
         if self.atPoint(touches.first!.location(in: self)).name != "Default Tile Map" {
             touchedNodeName = self.atPoint(touches.first!.location(in: self)).name
             print("touchedNodeName: \(touchedNodeName)")
-            for buffer in GlobalVariableManager.shared.unitNodes {
+            for buffer in GlobalVariableManager.shared.allyUnitNodes.values {
                 if buffer.name == touchedNodeName {
                     self.touchedNode = buffer
                 }
-        }
-
+            }
         }
         
         // Nodeの現在Tile座標取得
@@ -105,6 +104,9 @@ class BattleFieldScene: SKScene {
         // TileのColumnとRowに変換
         self.previousColumn = tileMapNode!.tileColumnIndex(fromPosition: previousPosition)
         self.previousRow = tileMapNode!.tileRowIndex(fromPosition: previousPosition)
+        
+        // 触ったNodeの保持しているActionを破棄
+        GlobalVariableManager.shared.allyUnitActions[self.touchedNodeName]!.removeAll()
     }
     
     // ドラッグ時の呼び出しメソッド
@@ -137,30 +139,30 @@ class BattleFieldScene: SKScene {
             if (distinationColumn - previousColumn) == 0 && (distinationRow - previousRow) == 1 {
                 self.moveNode()
                 print("Forward")
-                // 右斜め前
+            // 右斜め前
             } else if (distinationColumn - previousColumn) == 1 && (distinationRow - previousRow) == 0 {
                 self.moveNode()
                 print("DiagonallyForwardRight")
-                // 右斜め後
+            // 右斜め後
             } else if (distinationColumn - previousColumn) == 1 && (distinationRow - previousRow) == -1 {
                 self.moveNode()
                 print("RightRear")
-                // 後
+            // 後
             } else if (distinationColumn - previousColumn) == 0 && (distinationRow - previousRow) == -1 {
                 self.moveNode()
                 print("Backward")
-                // 左斜め後
+            // 左斜め後
             } else if (distinationColumn - previousColumn) == -1 && (distinationRow - previousRow) == -1 {
                 self.moveNode()
                 print("LeftRear")
-                // 左斜め前
+            // 左斜め前
             } else if (distinationColumn - previousColumn) == -1 && (distinationRow - previousRow) == 0 {
                 self.moveNode()
                 print("DiagonallyForwardLeft")
-                // 同位置
+            // 同位置
             } else if (distinationColumn - previousColumn) == 0 && (distinationRow - previousRow) == 0 {
                 print("The same location")
-                // 範囲外
+            // 範囲外
             } else {
                 print("Out of range")
             }
@@ -204,18 +206,27 @@ class BattleFieldScene: SKScene {
     // 指定したTileのcolumnとrowから座標を取得して、Tileの中心に移動
     func moveNode() {
         
-        print("\(self.touchedNodeName):\(GlobalVariableManager.shared.unitNodes[0].name)")
-        print("\(self.touchedNodeName):\(GlobalVariableManager.shared.unitNodes[1].name)")
-        if self.touchedNodeName == GlobalVariableManager.shared.unitNodes[0].name {
-            GlobalVariableManager.shared.unit1Actions.removeAll()
-            GlobalVariableManager.shared.unit1Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
-            print(GlobalVariableManager.shared.unit1Actions)
-        } else if self.touchedNodeName == GlobalVariableManager.shared.unitNodes[1].name {
-            GlobalVariableManager.shared.unit2Actions.removeAll()
-            GlobalVariableManager.shared.unit2Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
-            print(GlobalVariableManager.shared.unit2Actions)
-        }
+//        if self.touchedNodeName == GlobalVariableManager.shared.allyUnitNodes["AllyUnit1"]!.name {
+            if GlobalVariableManager.shared.allyUnitActions[self.touchedNodeName]!.keys.contains("Action1") {
+                print("Action2")
+                // 2個目のAction
+                GlobalVariableManager.shared.allyUnitActions[self.touchedNodeName]!.updateValue(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0), forKey: "Action2")
+            } else {
+                // 1個目のAction
+                print("Action1")
+                GlobalVariableManager.shared.allyUnitActions[self.touchedNodeName]!.updateValue(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0), forKey: "Action1")
+            }
+//        }
         
+            
+//            GlobalVariableManager.shared.unit1Actions.removeAll()
+//            GlobalVariableManager.shared.unit1Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
+//            print(GlobalVariableManager.shared.unit1Actions)
+//        } else if self.touchedNodeName == GlobalVariableManager.shared.allyUnitNodes["AllyUnit2"]!.name {
+//            GlobalVariableManager.shared.unit2Actions.removeAll()
+//            GlobalVariableManager.shared.unit2Actions.append(SKAction.move(to: CGPoint(x:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).x, y:tileMapNode!.centerOfTile(atColumn: distinationColumn, row: distinationRow).y), duration:1.0))
+//            print(GlobalVariableManager.shared.unit2Actions)
+//        }
         
         print(distinationColumn - previousColumn)
         print(distinationRow - previousRow)
